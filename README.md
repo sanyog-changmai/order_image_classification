@@ -11,7 +11,7 @@ This Django REST API allows clients to upload an image along with an `order_id` 
 - Uses CLIP model to compare against a list of predefined labels
 - Returns the top matched label, confidence score, and a boolean indicating if the image contains valid delivery items
 - Supports synchronous processing
-- Easily extendable for future scalability
+- Asynchronously saves image on cloud and create classification result as ledger
 
 ## API Endpoints
 
