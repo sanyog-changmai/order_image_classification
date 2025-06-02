@@ -83,7 +83,11 @@ class OrderImageManager:
             })
 
             # Create classification ledger for the image
-            create_image_classification_ledger.delay(order_id, image, img_classification_data)
+            # Save image to memory and convert image to base64 format
+            buffered = BytesIO()
+            image.save(buffered, format="PNG")
+            image_base64 = base64.b64encode(buffered.getvalue()).decode()
+            create_image_classification_ledger.delay(order_id, image_base64, img_classification_data)
 
             return {
                 "order_id": order_id,
